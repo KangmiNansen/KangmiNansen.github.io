@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kangmansen · 个人主页</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
+                 "Microsoft YaHei", sans-serif;
+    background: #fafafa;
+    color: #333;
+    min-height: 100vh;
+  display: flex;
+    align-items: center;
+   justify-content: center;
+    padding: 60px 24px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ---------- 头像 + 信息 ------ */
+  .profile {
+    display: flex;
+    flex-direction: row;
+  align-items: center;      /* 头像与文字整体垂直居中 */
+    justify-content: center;
+    gap: 48px;
+    width: 100%;
+   flex-wrap: wrap;
+  }
+
+ /* 直角长方形头像 */
+  .avatar {
+    flex: 0 0 auto;
+    width: 160px;
+    height: 200px;            /* 4:5 长方形，直角无边角 */
+  overflow: hidden;
+    background: #eceff1;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+
+    /* 关键：旋转轴心 = 底部中点，所以底部中间那一点始终不动 */
+    transform-origin: bottom center;
+    will-change: transform;
+  }
+
+  .avatar svg {
+    width: 100%;
+    height: 100%;
+  display: block;
+  }
+
+  /* 只要鼠标还在头像上就一直摇晃 */
+  @media (hover: hover) and (pointer: fine) {
+    .avatar:hover {
+     animation: shake .8s ease-in-out infinite;
+    }
+  }
+
+  /* 触屏设备：按住时摇晃，松手即停 */
+  .avatar:active {
+    animation: shake .8s ease-in-out infinite;
+  }
+
+  @keyframes shake {
+    0%   { transform: rotate(0deg); }
+   25%  { transform: rotate(-8deg); }
+    50%  { transform: rotate(0deg); }
+    75%  { transform: rotate(8deg); }
+  100% { transform: rotate(0deg); }
+  }
+
+  /* ---------- 右侧信息 -------- */
+  .info {
+    flex: 1 1 280px;
+    min-width: 240px;
+    line-height: 1.9;
+    font-size: 1rem;
+    color: #4a4a4a;
+  }
+  .nickname {
+  font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: .5px;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
+  .info p {
+    margin: 6px 0;
+    word-break: break-word;   /* 长链接不撑破布局 */
+  }
+
+  .label {
+    color: #8a8a8a;
+    font-weight: 500;
+  }
+
+  .info a {
+    color: #3498db;
+    text-decoration: none;
+   border-bottom: 1px dashed #3498db;
+   transition: color .2s, border-color .2s;
+  }
+
+  .info a:hover {
+    color: #217dbb;
+    border-bottom-style: solid;
+  }
+
+  /* ---------- 自我介绍 ------ */
+  .intro {
+    width: 100%;
+    max-width: 620px;
+  margin-top: 56px;
+    padding-top: 36px;
+    border-top: 1px solid #e8e8e8;
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: #555;
+  }
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width: 620px) {
+    body { padding: 40px 20px; }
+
+    .profile {
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 140px;
+      height: 175px;
+    }
+
+    .info {
+      flex: none;
+      width: 100%;
+     min-width: 0;
+      text-align: center;
+    }
+
+    .nickname { font-size: 1.6rem; }
+
+    .intro {
+      margin-top: 40px;
+      padding-top: 28px;
+      font-size: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- 头像 + 联系方式 -->
+    <div class="profile">
+
+      <!-- 直角长方形头像，鼠标停留期间持续左右摇晃，轴心为底部中点 -->
+      <div class="avatar">
+        <svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="头像">
+         <rect width="160" height="200" fill="#eceff1"/>
+         <circle cx="80" cy="76" r="30" fill="#b0bec5"/>
+        <path d="M80 116 C 46 116, 26 146, 26 200 L 134 200 C 134 146, 114 116, 80 116 Z" fill="#b0bec5"/>
+        </svg>
+     </div>
+
+      <!-- 右侧文字信息 -->
+      <div class="info">
+        <div class="nickname">Kangmansen</div>
+        <p><span class="label">姓名：</span>梁建鑫</p>
+        <p><span class="label">Email：</span>kangminansen@163.com</p>
+        <p><span class="label">GitHub：</span><a href="https://github.com/KangmiNansen" target="_blank" rel="noopener noreferrer">https://github.com/KangmiNansen</a></p>
+        <p><span class="label">QQ：</span>2174670042</p>
+      </div>
+
+    </div>
+
+    <!-- 自我介绍 -->
+   <p class="intro">
+     你好，我是KangmiNansen。我是minecraft服务器CubeXMC组织的一名成员。如果你需要联系我，我头像旁有我的联系方式，欢迎致电我。
+   </p>
+
+  </div>
+</body>
+</html>
